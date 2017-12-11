@@ -16,7 +16,6 @@ import pure from 'recompose/pure';
 import Chip from './Chip';
 
 var chipStyle = { marginRight: 7 };
-console.log('asdadsas');
 
 var BasicTooltip = function BasicTooltip(props) {
     var id = props.id,
