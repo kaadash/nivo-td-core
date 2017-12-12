@@ -33,6 +33,7 @@ const Axes = ({
     right,
     bottom,
     left,
+    edge,
 
     // theming
     theme,
@@ -58,6 +59,7 @@ const Axes = ({
                 return (
                     <Axis
                         theme={theme}
+                        edge={edge}
                         {...axis}
                         key={position}
                         width={width}

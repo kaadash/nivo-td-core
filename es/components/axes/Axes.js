@@ -31,6 +31,7 @@ var Axes = function Axes(_ref) {
         right = _ref.right,
         bottom = _ref.bottom,
         left = _ref.left,
+        edge = _ref.edge,
         theme = _ref.theme,
         animate = _ref.animate,
         motionStiffness = _ref.motionStiffness,
@@ -51,7 +52,8 @@ var Axes = function Axes(_ref) {
             var scale = horizontalPositions.includes(position) ? xScale : yScale;
 
             return React.createElement(Axis, _extends({
-                theme: theme
+                theme: theme,
+                edge: edge
             }, axis, {
                 key: position,
                 width: width,

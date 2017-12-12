@@ -64,6 +64,7 @@ const Axis = ({
     tickRotation,
     format,
     axisFormat,
+    edge,
 
     // legend
     legend: _legend,
@@ -90,8 +91,16 @@ const Axis = ({
         tickCount,
         tickSize,
         tickPadding,
-        tickRotation,
+        tickRotation
     })
+    const newValues = computeAxisTicks({
+        width,
+        height,
+        scale,
+        position: _position,
+        tickValues: [...scale.ticks(), edge.value]
+    })
+    const edgeTick = newValues.ticks.filter(({value}) => value === edge.value)[0];
 
     let legend = null
     if (_legend !== undefined) {
@@ -146,7 +155,7 @@ const Axis = ({
                         key={tick.key}
                         value={tick.key}
                         format={format}
-                        lineX={index === 0 && _position === 'left' ? width : tick.lineX}
+                        lineX={tick.key === 0 && _position === 'left' ? width : tick.lineX}
                         lineY={tick.lineY}
                         rotate={tickRotation}
                         textX={tick.textX}
@@ -214,8 +223,9 @@ const Axis = ({
             {legend}
             {tickElements}
             {
-                _position === 'left' ? (<line x1="0" x2="0" y1="0" y2={height} />) : ''
+                _position === 'left' ? (<line x1="0" x2="0" y1="0" y2={height} stroke="#cacaca" />) : ''
             }
+            <line stroke="red" x1={edgeTick.x} x2={width} y1={edgeTick.y} y2={edgeTick.y}  />
         </g>
     )
 }
