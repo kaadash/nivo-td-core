@@ -64,7 +64,7 @@ var AxisTick = function (_Component) {
                 } } : {}, {
                 style: gStyle
             }),
-            React.createElement('line', { x1: 0, x2: lineX, y1: 0, y2: lineY, stroke: '#cacaca' }),
+            React.createElement('line', { x1: 0, x2: lineX, y1: 0, y2: lineY, stroke: theme.axis.tickColor }),
             React.createElement(
                 'text',
                 {

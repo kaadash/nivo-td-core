@@ -72,7 +72,6 @@ var Axis = function Axis(_ref2) {
         tickRotation = _ref2.tickRotation,
         format = _ref2.format,
         axisFormat = _ref2.axisFormat,
-        edge = _ref2.edge,
         _legend = _ref2.legend,
         legendPosition = _ref2.legendPosition,
         legendOffset = _ref2.legendOffset,
@@ -98,18 +97,6 @@ var Axis = function Axis(_ref2) {
         ticks = _computeAxisTicks.ticks,
         textAlign = _computeAxisTicks.textAlign,
         textBaseline = _computeAxisTicks.textBaseline;
-
-    var newValues = computeAxisTicks({
-        width: width,
-        height: height,
-        scale: scale,
-        position: _position,
-        tickValues: [].concat(scale.ticks(), [edge.value])
-    });
-    var edgeTick = newValues.ticks.filter(function (_ref3) {
-        var value = _ref3.value;
-        return value === edge.value;
-    })[0];
 
     var legend = null;
     if (_legend !== undefined) {
@@ -165,7 +152,7 @@ var Axis = function Axis(_ref2) {
                     key: tick.key,
                     value: tick.key,
                     format: format,
-                    lineX: tick.key === 0 && _position === 'left' ? width : tick.lineX,
+                    lineX: index === 0 && _position === 'left' ? width : tick.lineX,
                     lineY: tick.lineY,
                     rotate: tickRotation,
                     textX: tick.textX,
@@ -205,10 +192,10 @@ var Axis = function Axis(_ref2) {
                 return React.createElement(
                     'g',
                     null,
-                    interpolatedStyles.map(function (_ref4) {
-                        var key = _ref4.key,
-                            style = _ref4.style,
-                            tick = _ref4.data;
+                    interpolatedStyles.map(function (_ref3) {
+                        var key = _ref3.key,
+                            style = _ref3.style,
+                            tick = _ref3.data;
                         return React.createElement(AxisTick, _extends({
                             key: key,
                             value: key,
@@ -234,8 +221,7 @@ var Axis = function Axis(_ref2) {
         { transform: 'translate(' + x + ',' + y + ')' },
         legend,
         tickElements,
-        _position === 'left' ? React.createElement('line', { x1: '0', x2: '0', y1: '0', y2: height, stroke: '#cacaca' }) : '',
-        React.createElement('line', { stroke: 'red', x1: edgeTick.x, x2: width, y1: edgeTick.y, y2: edgeTick.y })
+        _position === 'left' ? React.createElement('line', { x1: '0', x2: '0', y1: '0', y2: height }) : ''
     );
 };
 
@@ -277,8 +263,8 @@ Axis.defaultProps = {
     legendOffset: 0
 };
 
-var enhance = compose(withMotion(), withPropsOnChange(['format'], function (_ref5) {
-    var format = _ref5.format;
+var enhance = compose(withMotion(), withPropsOnChange(['format'], function (_ref4) {
+    var format = _ref4.format;
 
     if (!format || isFunction(format)) return { format: format };
     return { format: d3Format(format) };

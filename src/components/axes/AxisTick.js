@@ -59,7 +59,7 @@ export default class AxisTick extends Component {
                 {...(onClick ? { onClick: e => onClick(e, value) } : {})}
                 style={gStyle}
             >
-                <line x1={0} x2={lineX} y1={0} y2={lineY} stroke={'#cacaca'} />
+                <line x1={0} x2={lineX} y1={0} y2={lineY} stroke={theme.axis.tickColor} />
                 <text
                     alignmentBaseline={textBaseline}
                     textAnchor={textAnchor}
