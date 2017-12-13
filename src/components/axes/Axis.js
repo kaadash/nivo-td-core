@@ -146,7 +146,7 @@ const Axis = ({
                         key={tick.key}
                         value={tick.key}
                         format={format}
-                        lineX={index === 0 && _position === 'left' ? width : tick.lineX}
+                        lineX={tick.key === 0 && _position === 'left' ? width : tick.lineX}
                         lineY={tick.lineY}
                         rotate={tickRotation}
                         textX={tick.textX}
