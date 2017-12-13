@@ -15,12 +15,17 @@ const tableStyle = {
     borderCollapse: 'collapse',
 }
 
-const TableTooltip = ({ title, rows, theme }) => {
+const TableTooltip = ({ title, rows, theme, template }) => {
     if (!rows.length) return null
 
     return (
         <div style={theme.tooltip.container}>
             {title && title}
+            {
+                template
+                  ? <div dangerouslySetInnerHTML={{__html: template}} />
+                  : ''
+            }
             <table style={{ ...tableStyle, ...theme.tooltip.table }}>
                 <tbody>
                     {rows.map((row, i) => (

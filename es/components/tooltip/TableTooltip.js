@@ -20,7 +20,8 @@ var tableStyle = {
 var TableTooltip = function TableTooltip(_ref) {
     var title = _ref.title,
         rows = _ref.rows,
-        theme = _ref.theme;
+        theme = _ref.theme,
+        template = _ref.template;
 
     if (!rows.length) return null;
 
@@ -28,6 +29,7 @@ var TableTooltip = function TableTooltip(_ref) {
         'div',
         { style: theme.tooltip.container },
         title && title,
+        template ? React.createElement('div', { dangerouslySetInnerHTML: { __html: template } }) : '',
         React.createElement(
             'table',
             { style: _extends({}, tableStyle, theme.tooltip.table) },
