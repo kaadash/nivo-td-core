@@ -152,6 +152,7 @@ var Axis = function Axis(_ref2) {
                     key: tick.key,
                     value: tick.key,
                     format: format,
+                    axisFormat: axisFormat,
                     lineX: tick.key === 0 && _position === 'left' ? width : tick.lineX,
                     lineY: tick.lineY,
                     rotate: tickRotation,
