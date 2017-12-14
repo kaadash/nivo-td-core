@@ -15,27 +15,30 @@ import withPropsOnChange from 'recompose/withPropsOnChange'
 import pure from 'recompose/pure'
 import Chip from './Chip'
 
-const chipStyle = { marginRight: 7 }
+const chipStyle = {
+    marginRight: 7,
+    borderRadius: '50%',
+}
 
 const BasicTooltip = props => {
-    const { id, value: _value, format, enableChip, color, theme } = props
+    const { id, value: _value, format, enableChip, color, theme, data } = props
 
     let value = _value
-    if (format !== undefined && value !== undefined) {
-        value = format(value)
-    }
+  if (format !== undefined && value !== undefined) {
+    value = format(value, data.keyName.format)
+  }
 
     return (
         <div style={theme.tooltip.container}>
             <div style={theme.tooltip.basic}>
-                {enableChip && <Chip color={color} style={chipStyle} />}
-                {value !== undefined ? (
-                    <span>
-                        {id}: <strong>{value}</strong>
+              {enableChip && <Chip size={6} color={color} style={chipStyle} />}
+              {value !== undefined ? (
+                <span>
+                        {data.keyName.name}: {value}
                     </span>
-                ) : (
-                    id
-                )}
+              ) : (
+                id
+              )}
             </div>
         </div>
     )

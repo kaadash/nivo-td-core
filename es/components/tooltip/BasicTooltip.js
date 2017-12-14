@@ -15,7 +15,10 @@ import withPropsOnChange from 'recompose/withPropsOnChange';
 import pure from 'recompose/pure';
 import Chip from './Chip';
 
-var chipStyle = { marginRight: 7 };
+var chipStyle = {
+    marginRight: 7,
+    borderRadius: '50%'
+};
 
 var BasicTooltip = function BasicTooltip(props) {
     var id = props.id,
@@ -23,12 +26,13 @@ var BasicTooltip = function BasicTooltip(props) {
         format = props.format,
         enableChip = props.enableChip,
         color = props.color,
-        theme = props.theme;
+        theme = props.theme,
+        data = props.data;
 
 
     var value = _value;
     if (format !== undefined && value !== undefined) {
-        value = format(value);
+        value = format(value, data.keyName.format);
     }
 
     return React.createElement(
@@ -37,17 +41,13 @@ var BasicTooltip = function BasicTooltip(props) {
         React.createElement(
             'div',
             { style: theme.tooltip.basic },
-            enableChip && React.createElement(Chip, { color: color, style: chipStyle }),
+            enableChip && React.createElement(Chip, { size: 6, color: color, style: chipStyle }),
             value !== undefined ? React.createElement(
                 'span',
                 null,
-                id,
+                data.keyName.name,
                 ': ',
-                React.createElement(
-                    'strong',
-                    null,
-                    value
-                )
+                value
             ) : id
         )
     );
